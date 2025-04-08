@@ -1,11 +1,39 @@
 ﻿<!DOCTYPE html>
-
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="ru">
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+	<meta charset="UTF-8">
+	<title>Интерактивная инфографика</title>
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <h1>Эволюция дизайна интерфейсов</h1>
 
+	<div class="infographic-container">
+		<svg width="500" height="100" xmlns="http://www.w3.org/2000/svg">
+			<!-- Линия таймлайна -->
+			<line x1="50" y1="50" x2="450" y2="50" stroke="#ccc" stroke-width="4" />
+
+			<!-- Кнопки-годы -->
+			<!-- 1970 -->
+			<circle cx="50" cy="50" r="25" fill="#007bff" />
+			<text class="timeline-year" x="50" y="55" text-anchor="middle" font-size="12" fill="#fff">1970</text>
+
+			<!-- 1980 -->
+			<circle cx="150" cy="50" r="25" fill="#007bff" />
+			<text class="timeline-year" x="150" y="55" text-anchor="middle" font-size="12" fill="#fff">1980</text>
+
+			<!-- 1990 -->
+			<circle cx="250" cy="50" r="25" fill="#007bff" />
+			<text class="timeline-year" x="250" y="55" text-anchor="middle" font-size="12" fill="#fff">1990</text>
+
+			<!-- 2000 -->
+			<circle cx="350" cy="50" r="25" fill="#007bff" />
+			<text class="timeline-year" x="350" y="55" text-anchor="middle" font-size="12" fill="#fff">2000</text>
+
+			<!-- 2010 -->
+			<circle cx="450" cy="50" r="25" fill="#007bff" />
+			<text class="timeline-year" x="450" y="55" text-anchor="middle" font-size="12" fill="#fff">2010</text>
+		</svg>
+	</div>
 </body>
 </html>

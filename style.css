@@ -1,3 +1,43 @@
-﻿body
-{
+﻿
+body {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.infographic-container {
+    max-width: 100%;
+    margin-top: 20px;
+}
+
+svg {
+    width: 80%;
+    height: auto;
+}
+
+/* Стили для изменения цвета */
+.change-color {
+    fill: #000; /* Исходный цвет */
+    transition: fill 0.3s ease;
+    cursor: pointer;
+}
+
+    .change-color:hover {
+        fill: red;
+        stroke: pink;
+    }
+
+.gradient-bar {
+    height: 30px;
+    transition: transform 0.3s;
+}
+
+.year:hover .gradient-bar {
+    transform: scaleY(1.5);
+}
+
+.timeline-year {
+    font-size: 12px;
+    fill: #fff;
+    font-family: 'Courier New', Courier, monospace;
 }
