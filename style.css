@@ -1,4 +1,30 @@
-﻿body {
+﻿@font-face {
+    font-family: 'PrintChar21';
+    src: url('fonts/PrintChar21.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'pixChicago';
+    src: url('../fonts/pixChicago.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+.pixel-font {
+    font-family: 'pixChicago', monospace;
+    font-size: 16px;
+    line-height: 1;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: none;
+    image-rendering: pixelated;
+    text-rendering: optimizeSpeed;
+}
+
+body {
     margin: 0;
     text-align: center;
     font-family: Arial, sans-serif;
@@ -7,6 +33,7 @@
 h1 {
     font-size: 40px;
     margin-bottom: 30px;
+    font-family: 'PrintChar21', monospace;
 }
 
 .infographic-container {
@@ -33,20 +60,54 @@ svg {
 
 .timeline-year {
     font-size: 12px;
-    fill: #fff;
-    font-family: 'Courier New', Courier, monospace;
     pointer-events: none;
+    fill: white;
 }
+
+    .timeline-year.first {
+        fill: #00ff5a;
+    }
+
+    .timeline-year.second {
+        font-family: 'pixChicago';
+        -webkit-font-smoothing: none;
+        font-smooth: never;
+        text-rendering: optimizeSpeed;
+        shape-rendering: crispEdges;
+        pointer-events: none;
+        vector-effect: non-scaling-stroke;
+        image-rendering: pixelated;
+    }
 
 .content-container {
     margin: 20px auto;
-    max-width: 800px;
-    min-height: 220px;
+    width: 800px;
+    height: 600px;
+    position: relative;
 }
 
-    .content-container svg {
-        width: 100%;
-        height: auto;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        border-radius: 10px;
-    }
+.window {
+    position: absolute;
+    width: 400px;
+    height: 160px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    transform-origin: top left;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.window-title {
+    padding: 8px 15px;
+    background-color: rgba(0,0,0,0.1);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    font-weight: bold;
+    color: white;
+}
+
+.window-content {
+    padding: 15px;
+    color: white;
+    font-size: 16px;
+}
