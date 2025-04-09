@@ -1,9 +1,11 @@
 ﻿@font-face {
     font-family: 'LCD5x8HRU';
     src: url('fonts/LCD5x8HRU.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+}
+
+@font-face {
+    font-family: 'ChicagoPlain';
+    src: url('fonts/chicago-plain-001-001.ttf') format('truetype');
 }
 
 body {
@@ -53,13 +55,12 @@ svg {
     }
 
     .timeline-year.second {
+        fill: #33FF57;
+        font-family: 'ChicagoPlain', sans-serif;
         -webkit-font-smoothing: none;
         font-smooth: never;
-        text-rendering: optimizeSpeed;
-        shape-rendering: crispEdges;
         pointer-events: none;
-        vector-effect: non-scaling-stroke;
-        image-rendering: pixelated;
+        font-size: 10px;
     }
 
 .content-container {
@@ -69,7 +70,6 @@ svg {
     overflow: visible;
 }
 
-/* Общие стили для окон */
 .window {
     opacity: 0;
     transition: opacity 0.3s ease, transform 0.3s ease;
@@ -94,11 +94,10 @@ svg {
     text-anchor: middle;
 }
 
-/* Специальные стили для окон 1970 года */
+/* 1970 */
 .window-1970 .window-title {
     font-family: 'LCD5x8HRU', monospace;
     fill: #00ff5a;
-    text-anchor: middle;
     font-size: 10px;
     letter-spacing: 1px;
 }
@@ -106,10 +105,27 @@ svg {
 .window-1970 .window-content {
     font-family: 'LCD5x8HRU', monospace;
     fill: #00ff5a;
+    font-size: 10px;
     text-anchor: start;
-    font-size: 10px; 
 }
 
-    .window-1970 .window-content tspan {
-        font-size: 10px; 
-    }
+/* 1980 */
+.window-1980 .window-rect {
+    fill: white;
+    stroke: #333;
+}
+
+.window-1980 .window-title {
+    font-family: 'ChicagoPlain', sans-serif;
+    fill: black;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.window-1980 .window-content {
+    font-family: 'ChicagoPlain', sans-serif;
+    fill: black;
+    font-size: 12px;
+    text-anchor: start;
+}
+
