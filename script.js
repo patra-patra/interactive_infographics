@@ -66,18 +66,33 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (year === '1980') {
                         // Голубая верхняя панель
                         const titleBar = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-                        titleBar.setAttribute('x', '31');
-                        titleBar.setAttribute('y', '31');
-                        titleBar.setAttribute('width', '348');
+                        titleBar.setAttribute('x', '30');
+                        titleBar.setAttribute('y', '30');
+                        titleBar.setAttribute('width', '350');
                         titleBar.setAttribute('height', '24');
                         titleBar.setAttribute('fill', 'cyan');
+                        titleBar.setAttribute('stroke', 'black');
                         windowGroup.appendChild(titleBar);
+
+                        // Красный квадрат-кнопка под крестик
+                        const closeBox = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                        closeBox.setAttribute('x', '356');
+                        closeBox.setAttribute('y', '30');
+                        closeBox.setAttribute('width', '24');
+                        closeBox.setAttribute('height', '24');
+                        closeBox.setAttribute('fill', 'red');
+                        closeBox.setAttribute('stroke', 'black');
+                        closeBox.setAttribute('rx', '0');
+                        closeBox.setAttribute('ry', '0');
+                        windowGroup.appendChild(closeBox);
 
                         // Кнопка-крестик
                         const closeX = document.createElementNS("http://www.w3.org/2000/svg", "text");
-                        closeX.setAttribute('x', '360');
+                        closeX.setAttribute('x', '364');
                         closeX.setAttribute('y', '47');
-                        closeX.setAttribute('font-size', '14');
+                        closeX.setAttribute('font-size', '12');
+                        closeX.setAttribute('fill', 'black');
+                        closeX.setAttribute('pointer-events', 'none');
                         closeX.textContent = '✖';
                         windowGroup.appendChild(closeX);
                     }

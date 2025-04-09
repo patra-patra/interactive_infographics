@@ -37,6 +37,12 @@ svg {
     transition: fill 0.3s ease;
     cursor: pointer;
 }
+    .timeline-btn.first {
+        fill: black;
+    }
+    .timeline-btn.second {
+        fill: cyan;
+    }
 
     .timeline-btn:hover {
         fill: #0056b3;
@@ -55,7 +61,7 @@ svg {
     }
 
     .timeline-year.second {
-        fill: #33FF57;
+        fill: black;
         font-family: 'ChicagoPlain', sans-serif;
         -webkit-font-smoothing: none;
         font-smooth: never;
