@@ -23,11 +23,18 @@ body {
     text-align: center;
     font-family: Arial, sans-serif;
     padding: 20px;
+    box-sizing: border-box;
+    background: radial-gradient(ellipse at top, #202040 0%, #0d0d1a 100%);
+    background-size: cover;
+    color: white;
 }
 
 h1 {
-    font-size: 32px;
-    margin-bottom: 20px;
+    font-family: 'LCD5x8HRU', monospace;
+    font-size: 2.5rem;
+    color: #00ff5a;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 .infographic-container {
@@ -35,11 +42,13 @@ h1 {
     justify-content: center;
     align-items: center;
     margin: 0 auto 20px;
-    max-width: 700px;
-}
-
-svg {
+    max-width: 700px; 
     width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+svg {
+    max-width: 100%;
     height: auto;
 }
 
@@ -47,21 +56,27 @@ svg {
     transition: fill 0.3s ease;
     cursor: pointer;
 }
+
     .timeline-btn.first {
         fill: black;
     }
+
     .timeline-btn.second {
         fill: cyan;
     }
+
     .timeline-btn.third {
         fill: #000084;
     }
+
     .timeline-btn.fourth {
         fill: #a0c8ff;
     }
+
     .timeline-btn.fifth {
         fill: #08BCE3;
     }
+
     .timeline-btn:hover {
         fill: #0056b3;
     }
@@ -93,6 +108,7 @@ svg {
         -webkit-font-smoothing: none;
         font-smooth: never;
     }
+
     .timeline-year.fourth {
         font-family: 'Segoe UI', Arial, sans-serif;
         fill: #100d0d;
@@ -103,17 +119,22 @@ svg {
         paint-order: stroke;
         text-shadow: 0 0 5px white;
     }
+
     .timeline-year.fifth {
         font-family: 'Segoe UI', Arial, sans-serif;
         fill: #100d0d;
     }
-    
+
 
 .content-container {
     margin: 20px auto;
-    width: 700px;
-    height: 500px;
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    min-height: 500px;
     overflow: visible;
+    padding: 0 15px;
+    box-sizing: border-box;
 }
 
 .window {
@@ -232,6 +253,56 @@ svg {
     font-size: 12px;
     text-anchor: start;
 }
+
 .window-2010 .window-rect {
     filter: drop-shadow(-5px 5px 5px rgba(0,0,0,0.3));
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .content-container {
+        min-height: 400px;
+    }
+
+    .window-content {
+        font-size: 10px;
+    }
+
+    .window-title {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    .infographic-container {
+        margin-bottom: 10px;
+    }
+
+    .content-container {
+        min-height: 350px;
+    }
+
+    .timeline-btn {
+        r: 14px;
+    }
+
+    .timeline-year {
+        font-size: 8px;
+    }
+
+    .window-content {
+        font-size: 8px;
+    }
+
+    .window-title {
+        font-size: 8px;
+    }
 }

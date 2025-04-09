@@ -2,6 +2,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const buttons = document.querySelectorAll('.timeline-btn');
     const windowsSvg = document.getElementById('windows-svg');
 
+    // Определение размеров в зависимости от ширины экрана
+    const isMobile = window.innerWidth < 768;
+    const windowWidth = isMobile ? 250 : 350;
+    const windowHeight = isMobile ? 150 : 200;
+    const fontSize = isMobile ? 8 : 12;
+    const lineHeight = isMobile ? 10 : 15;
+
     const yearColors = {
         '1970': 'black',
         '1980': 'white',
@@ -60,10 +67,6 @@ document.addEventListener('DOMContentLoaded', function () {
             "  ",
             "Новые концепции: Скевоморфизм уступает место",
             "Flat-дизайну, появление Material Design от Google",
-            "  ",
-            "UX: интуитивная навигация, консистентность элементов,",
-            "доступность для всех пользователей.",
-
         ]
     };
 
@@ -75,24 +78,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
             windowsSvg.innerHTML = '';
 
-            for (let i = 0; i < 3; i++) {
+            for (let i = 0; i < (isMobile ? 2 : 3); i++) {
                 setTimeout(() => {
                     const windowGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
                     windowGroup.setAttribute('class', `window window-${year}`);
-                    windowGroup.setAttribute('transform', `translate(${10 + i * 20}, ${10 + i * 20})`);
+                    windowGroup.setAttribute('transform', `translate(${10 + i * (isMobile ? 15 : 20)}, ${10 + i * (isMobile ? 15 : 20)})`);
 
                     if (year === '1980') {
                         const titleBar = document.createElementNS("http://www.w3.org/2000/svg", "rect");
                         titleBar.setAttribute('x', '30');
                         titleBar.setAttribute('y', '30');
-                        titleBar.setAttribute('width', '350');
+                        titleBar.setAttribute('width', windowWidth.toString());
                         titleBar.setAttribute('height', '24');
                         titleBar.setAttribute('fill', 'cyan');
                         titleBar.setAttribute('stroke', 'black');
                         windowGroup.appendChild(titleBar);
 
                         const closeBox = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-                        closeBox.setAttribute('x', '356');
+                        closeBox.setAttribute('x', (30 + windowWidth - 24).toString());
                         closeBox.setAttribute('y', '30');
                         closeBox.setAttribute('width', '24');
                         closeBox.setAttribute('height', '24');
@@ -101,9 +104,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         windowGroup.appendChild(closeBox);
 
                         const closeX = document.createElementNS("http://www.w3.org/2000/svg", "text");
-                        closeX.setAttribute('x', '364');
+                        closeX.setAttribute('x', (30 + windowWidth - 16).toString());
                         closeX.setAttribute('y', '47');
-                        closeX.setAttribute('font-size', '12');
+                        closeX.setAttribute('font-size', fontSize.toString());
                         closeX.setAttribute('fill', 'black');
                         closeX.setAttribute('pointer-events', 'none');
                         closeX.textContent = '✖';
@@ -135,13 +138,13 @@ document.addEventListener('DOMContentLoaded', function () {
                         const titleBar = document.createElementNS("http://www.w3.org/2000/svg", "rect");
                         titleBar.setAttribute('x', '32');
                         titleBar.setAttribute('y', '32');
-                        titleBar.setAttribute('width', '347');
+                        titleBar.setAttribute('width', (windowWidth - 3).toString());
                         titleBar.setAttribute('height', '24');
                         titleBar.setAttribute('fill', 'url(#titleGradient)');
                         windowGroup.appendChild(titleBar);
 
                         const closeBox = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-                        closeBox.setAttribute('x', '357');
+                        closeBox.setAttribute('x', (32 + windowWidth - 25).toString());
                         closeBox.setAttribute('y', '34');
                         closeBox.setAttribute('width', '20');
                         closeBox.setAttribute('height', '20');
@@ -152,9 +155,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         windowGroup.appendChild(closeBox);
 
                         const closeX = document.createElementNS("http://www.w3.org/2000/svg", "text");
-                        closeX.setAttribute('x', '362');
+                        closeX.setAttribute('x', (32 + windowWidth - 18).toString());
                         closeX.setAttribute('y', '48');
-                        closeX.setAttribute('font-size', '12');
+                        closeX.setAttribute('font-size', fontSize.toString());
                         closeX.setAttribute('fill', 'black');
                         closeX.setAttribute('font-family', 'Arial');
                         closeX.textContent = '✖';
@@ -183,7 +186,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         aeroGradient.appendChild(stop3);
                         defs.appendChild(aeroGradient);
 
-                        // Добавляем фильтр для свечения текста
                         const filter = document.createElementNS("http://www.w3.org/2000/svg", "filter");
                         filter.setAttribute('id', 'glow');
                         const feGaussianBlur = document.createElementNS("http://www.w3.org/2000/svg", "feGaussianBlur");
@@ -203,22 +205,19 @@ document.addEventListener('DOMContentLoaded', function () {
                         defs.appendChild(filter);
                         windowGroup.appendChild(defs);
 
-                        // Основное окно (белая часть) с закругленными нижними углами
                         const mainWindow = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                        mainWindow.setAttribute('d', 'M32,56 L32,236 C32,236 32,242 38,242 L382,242 C388,242 388,236 388,236 L388,56');
+                        mainWindow.setAttribute('d', `M32,56 L32,${windowHeight} C32,${windowHeight} 32,${windowHeight + 6} 38,${windowHeight + 6} L${windowWidth + 32},${windowHeight + 6} C${windowWidth + 38},${windowHeight + 6} ${windowWidth + 38},${windowHeight} ${windowWidth + 38},${windowHeight} L${windowWidth + 38},56`);
                         mainWindow.setAttribute('fill', 'white');
                         mainWindow.setAttribute('stroke', 'grey');
                         mainWindow.setAttribute('stroke-width', '1');
                         windowGroup.appendChild(mainWindow);
 
-                        // Верхняя панель (синяя часть) с скруглением только сверху
                         const titleBar = document.createElementNS("http://www.w3.org/2000/svg", "path");
                         titleBar.setAttribute('d', 'M32,56 L32,32 C32,32 32,26 38,26 L382,26 C388,26 388,32 388,32 L388,56');
                         titleBar.setAttribute('fill', 'url(#aeroGradient)');
                         titleBar.setAttribute('stroke', 'grey');
                         mainWindow.setAttribute('stroke-width', '1');
 
-                        // Внутренняя белая обводка
                         const innerStroke = document.createElementNS("http://www.w3.org/2000/svg", "path");
                         innerStroke.setAttribute('d', 'M34,54 L34,34 C34,34 34,28 38,28 L382,28 C386,28 386,34 386,34 L386,54');
                         innerStroke.setAttribute('fill', 'none');
@@ -237,15 +236,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         const redStop1 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
                         redStop1.setAttribute('offset', '0%');
-                        redStop1.setAttribute('stop-color', '#8B0000'); // тёмно-красный
+                        redStop1.setAttribute('stop-color', '#8B0000');
 
                         const redStop2 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
                         redStop2.setAttribute('offset', '100%');
-                        redStop2.setAttribute('stop-color', '#FF7F7F'); // бледно-красный
+                        redStop2.setAttribute('stop-color', '#FF7F7F');
 
                         redGradient.appendChild(redStop1);
                         redGradient.appendChild(redStop2);
-                        defs.appendChild(redGradient); 
+                        defs.appendChild(redGradient);
 
                         const closeBtn = document.createElementNS("http://www.w3.org/2000/svg", "rect");
                         closeBtn.setAttribute('x', '356');
@@ -267,7 +266,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         closeX.textContent = 'x';
                         windowGroup.appendChild(closeX);
 
-                        // Заголовок
                         const title = document.createElementNS("http://www.w3.org/2000/svg", "text");
                         title.setAttribute('x', '42');
                         title.setAttribute('y', '50');
@@ -277,6 +275,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         title.textContent = '2000';
                         windowGroup.appendChild(title);
                     }
+
                     if (year === '2010') {
                         const filter = document.createElementNS("http://www.w3.org/2000/svg", "filter");
                         filter.setAttribute('id', 'windowShadow');
@@ -324,9 +323,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         filter.appendChild(feComposite);
                         filter.appendChild(feMerge);
 
-                        // Основное окно
                         const mainWindow = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                        mainWindow.setAttribute('d', 'M32,56 L32,236 C32,236 32,242 38,242 L382,242 C388,242 388,236 388,236 L388,56');
+                        mainWindow.setAttribute('d', `M32,56 L32,${windowHeight} C32,${windowHeight} 32,${windowHeight + 6} 38,${windowHeight + 6} L${windowWidth + 32},${windowHeight + 6} C${windowWidth + 38},${windowHeight + 6} ${windowWidth + 38},${windowHeight} ${windowWidth + 38},${windowHeight} L${windowWidth + 38},56`);
                         mainWindow.setAttribute('fill', 'white');
                         mainWindow.setAttribute('stroke', '#08BCE3');
                         mainWindow.setAttribute('stroke-width', '1');
@@ -334,7 +332,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         windowGroup.appendChild(filter);
                         windowGroup.appendChild(mainWindow);
 
-                        // Верхняя панель
                         const titleBar = document.createElementNS("http://www.w3.org/2000/svg", "path");
                         titleBar.setAttribute('d', 'M32,56 L32,32 C32,32 32,26 38,26 L382,26 C388,26 388,32 388,32 L388,56');
                         titleBar.setAttribute('fill', '#08BCE3');
@@ -342,17 +339,15 @@ document.addEventListener('DOMContentLoaded', function () {
                         titleBar.setAttribute('stroke-width', '1');
                         windowGroup.appendChild(titleBar);
 
-                        // Кнопка закрытия
                         const closeX = document.createElementNS("http://www.w3.org/2000/svg", "text");
                         closeX.setAttribute('x', '364');
                         closeX.setAttribute('y', '47');
-                        closeX.setAttribute('font-size', '12');
+                        closeX.setAttribute('font-size', fontSize.toString());
                         closeX.setAttribute('fill', 'black');
                         closeX.setAttribute('font-family', 'Arial');
                         closeX.textContent = '✖';
                         windowGroup.appendChild(closeX);
 
-                        // Заголовок окна
                         const title = document.createElementNS("http://www.w3.org/2000/svg", "text");
                         title.setAttribute('x', '42');
                         title.setAttribute('y', '48');
@@ -362,14 +357,12 @@ document.addEventListener('DOMContentLoaded', function () {
                         windowGroup.appendChild(title);
                     }
 
-
-                    // === ВСТАВКА: убираем универсальный прямоугольник для 2000 ===
                     if (year !== '2000' && year !== '2010') {
                         const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
                         rect.setAttribute('x', '30');
                         rect.setAttribute('y', '30');
-                        rect.setAttribute('width', '350');
-                        rect.setAttribute('height', year === '1970' ? 220 : 200);
+                        rect.setAttribute('width', windowWidth.toString());
+                        rect.setAttribute('height', year === '1970' ? (windowHeight + 20) : windowHeight);
                         rect.setAttribute('fill', color);
                         rect.setAttribute('rx', year === '2000' ? '10' : '0');
                         rect.setAttribute('ry', year === '2000' ? '10' : '0');
@@ -377,7 +370,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         windowGroup.insertBefore(rect, windowGroup.firstChild);
 
                         const title = document.createElementNS("http://www.w3.org/2000/svg", "text");
-                        title.setAttribute('x', '205');
+                        title.setAttribute('x', (30 + windowWidth / 2).toString());
                         title.setAttribute('y', '50');
                         title.setAttribute('class', 'window-title');
                         title.setAttribute('text-anchor', 'middle');
@@ -393,7 +386,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     content.forEach((line, index) => {
                         const tspan = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
                         tspan.setAttribute('x', '50');
-                        tspan.setAttribute('dy', index === 0 ? '0' : '15');
+                        tspan.setAttribute('dy', index === 0 ? '0' : lineHeight.toString());
                         tspan.textContent = line;
                         contentText.appendChild(tspan);
                     });
@@ -416,7 +409,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const firstButton = document.querySelector('.timeline-btn[data-year="1970"]');
     if (firstButton) {
         firstButton.click();
-    } else {
-        console.error('Кнопка 1970 не найдена!');
+    }
+});
+
+// Обработчик изменения размера окна
+window.addEventListener('resize', function () {
+    const firstButton = document.querySelector('.timeline-btn[data-year="1970"]');
+    if (firstButton) {
+        firstButton.click();
     }
 });
