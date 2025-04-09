@@ -8,6 +8,11 @@
     src: url('fonts/chicago-plain-001-001.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'Windows31';
+    src: url('fonts/system-font-from-windows-3-1.ttf') format('truetype');
+}
+
 body {
     margin: 0;
     text-align: center;
@@ -43,7 +48,9 @@ svg {
     .timeline-btn.second {
         fill: cyan;
     }
-
+    .timeline-btn.third {
+        fill: #000084;
+    }
     .timeline-btn:hover {
         fill: #0056b3;
     }
@@ -67,6 +74,12 @@ svg {
         font-smooth: never;
         pointer-events: none;
         font-size: 10px;
+    }
+    .timeline-year.third {
+        fill: white;
+        font-family: 'Windows31', sans-serif;
+        -webkit-font-smoothing: none;
+        font-smooth: never;
     }
 
 .content-container {
@@ -132,6 +145,29 @@ svg {
     font-family: 'ChicagoPlain', sans-serif;
     fill: black;
     font-size: 12px;
+    text-anchor: start;
+}
+
+/* 1990 */
+.window-1990 .window-rect {
+    -webkit-box-shadow: 3px 3px 0px 0px #000000;
+    box-shadow: 3px 3px 0px 0px #000000;
+}
+
+.window-1990 .window-title {
+    font-family: 'Windows31', sans-serif;
+    fill: white;
+    font-size: 14px;
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+}
+
+.window-1990 .window-content {
+    font-family: 'Windows31', sans-serif;
+    fill: black;
+    font-size: 10px;
+    -webkit-font-smoothing: none;
+    font-smooth: never;
     text-anchor: start;
 }
 

@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const yearColors = {
         '1970': 'black',
         '1980': 'white',
-        '1990': '#3357FF',
+        '1990': '#BDBDBD',
         '2000': '#F033FF',
         '2010': '#FF33F0'
     };
@@ -93,6 +93,61 @@ document.addEventListener('DOMContentLoaded', function () {
                         closeX.setAttribute('font-size', '12');
                         closeX.setAttribute('fill', 'black');
                         closeX.setAttribute('pointer-events', 'none');
+                        closeX.textContent = '✖';
+                        windowGroup.appendChild(closeX);
+                    }
+
+                    if (year === '1990') {
+                        // Создаем элемент defs с градиентом
+                        const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+                        const gradient = document.createElementNS("http://www.w3.org/2000/svg", "linearGradient");
+                        gradient.setAttribute('id', 'titleGradient');
+                        gradient.setAttribute('x1', '0%');
+                        gradient.setAttribute('x2', '100%');
+                        gradient.setAttribute('y1', '0%');
+                        gradient.setAttribute('y2', '0%');
+
+                        const stop1 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+                        stop1.setAttribute('offset', '0%');
+                        stop1.setAttribute('stop-color', '#000084');
+
+                        const stop2 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+                        stop2.setAttribute('offset', '100%');
+                        stop2.setAttribute('stop-color', '#0A0EC5');
+
+                        gradient.appendChild(stop1);
+                        gradient.appendChild(stop2);
+                        defs.appendChild(gradient);
+                        windowGroup.appendChild(defs);
+
+                        // Синяя верхняя панель с градиентом
+                        const titleBar = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                        titleBar.setAttribute('x', '32');
+                        titleBar.setAttribute('y', '32');
+                        titleBar.setAttribute('width', '347');
+                        titleBar.setAttribute('height', '24');
+                        titleBar.setAttribute('fill', 'url(#titleGradient)');
+                        windowGroup.appendChild(titleBar);
+
+                        // Серый квадрат-кнопка под крестик
+                        const closeBox = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                        closeBox.setAttribute('x', '357');
+                        closeBox.setAttribute('y', '34');
+                        closeBox.setAttribute('width', '20');
+                        closeBox.setAttribute('height', '20');
+                        closeBox.setAttribute('fill', '#BDBDBD');
+                        closeBox.setAttribute('stroke', 'black');
+                        closeBox.setAttribute('rx', '1');
+                        closeBox.setAttribute('ry', '1');
+                        windowGroup.appendChild(closeBox);
+
+                        // Кнопка-крестик
+                        const closeX = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                        closeX.setAttribute('x', '362');
+                        closeX.setAttribute('y', '48');
+                        closeX.setAttribute('font-size', '12');
+                        closeX.setAttribute('fill', 'black');
+                        closeX.setAttribute('font-family', 'Arial');
                         closeX.textContent = '✖';
                         windowGroup.appendChild(closeX);
                     }
