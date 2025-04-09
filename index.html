@@ -9,34 +9,37 @@
 	<h1>Эволюция дизайна интерфейсов</h1>
 
 	<div class="infographic-container">
-		<svg width="100%" height="80" viewBox="0 0 500 100" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+		<svg width="100%" height="60" viewBox="0 0 500 60" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
 			<!-- Линия таймлайна -->
-			<line x1="50" y1="40" x2="450" y2="40" stroke="#ccc" stroke-width="4" />
+			<line x1="30" y1="30" x2="470" y2="30" stroke="#ccc" stroke-width="3" />
 
 			<!-- Кнопки-годы -->
 			<!-- 1970 -->
-			<circle class="timeline-btn" cx="50" cy="40" r="20" fill="black" data-year="1970" />
-			<text class="timeline-year first" x="50" y="45" text-anchor="middle">1970</text>
+			<circle class="timeline-btn" cx="30" cy="30" r="18" fill="black" data-year="1970" />
+			<text class="timeline-year first" x="30" y="35" text-anchor="middle">1970</text>
 
 			<!-- 1980 -->
-			<circle class="timeline-btn" cx="150" cy="40" r="20" fill="#007bff" data-year="1980" />
-			<text class="timeline-year second" x="150" y="45" text-anchor="middle">1980</text>
+			<circle class="timeline-btn" cx="145" cy="30" r="18" fill="#007bff" data-year="1980" />
+			<text class="timeline-year second" x="145" y="35" text-anchor="middle">1980</text>
 
 			<!-- 1990 -->
-			<circle class="timeline-btn" cx="250" cy="40" r="20" fill="#007bff" data-year="1990" />
-			<text class="timeline-year" x="250" y="45" text-anchor="middle">1990</text>
+			<circle class="timeline-btn" cx="250" cy="30" r="18" fill="#007bff" data-year="1990" />
+			<text class="timeline-year" x="250" y="35" text-anchor="middle">1990</text>
 
 			<!-- 2000 -->
-			<circle class="timeline-btn" cx="350" cy="40" r="20" fill="#007bff" data-year="2000" />
-			<text class="timeline-year" x="350" y="45" text-anchor="middle">2000</text>
+			<circle class="timeline-btn" cx="355" cy="30" r="18" fill="#007bff" data-year="2000" />
+			<text class="timeline-year" x="355" y="35" text-anchor="middle">2000</text>
 
 			<!-- 2010 -->
-			<circle class="timeline-btn" cx="450" cy="40" r="20" fill="#007bff" data-year="2010" />
-			<text class="timeline-year" x="450" y="45" text-anchor="middle">2010</text>
+			<circle class="timeline-btn" cx="470" cy="30" r="18" fill="#007bff" data-year="2010" />
+			<text class="timeline-year" x="470" y="35" text-anchor="middle">2010</text>
 		</svg>
 	</div>
 
-	<div id="content-container" class="content-container"></div>
+	<div id="content-container" class="content-container">
+		<!-- Сюда будут добавляться SVG-окна -->
+		<svg id="windows-svg" width="100%" height="300" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg"></svg>
+	</div>
 	<script src="script.js"></script>
 </body>
 </html>
