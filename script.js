@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '1980': 'white',
         '1990': '#BDBDBD',
         '2000': '#5a9bd5',
-        '2010': '#FF33F0'
+        '2010': '#08BCE3'
     };
 
     const yearContents = {
@@ -52,8 +52,18 @@ document.addEventListener('DOMContentLoaded', function () {
             "Закруглённые углы и мягкие тени"
         ],
         '2010': [
-            "Современные тенденции:",
-            "неоморфизм, стеклоформность"
+            "Эпоха плоского дизайна и минимализма: Чистые формы",
+            "без лишних деталей.",
+            " ",
+            "Акцент на типографику и иконки",
+            "Адаптивность для мобильных устройств",
+            "  ",
+            "Новые концепции: Скевоморфизм уступает место",
+            "Flat-дизайну, появление Material Design от Google",
+            "  ",
+            "UX: интуитивная навигация, консистентность элементов,",
+            "доступность для всех пользователей.",
+
         ]
     };
 
@@ -235,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         redGradient.appendChild(redStop1);
                         redGradient.appendChild(redStop2);
-                        defs.appendChild(redGradient); // не забудь, уже добавлен в windowGroup выше
+                        defs.appendChild(redGradient); 
 
                         const closeBtn = document.createElementNS("http://www.w3.org/2000/svg", "rect");
                         closeBtn.setAttribute('x', '356');
@@ -267,65 +277,91 @@ document.addEventListener('DOMContentLoaded', function () {
                         title.textContent = '2000';
                         windowGroup.appendChild(title);
                     }
-
                     if (year === '2010') {
-                        const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
-                        windowGroup.appendChild(defs);
+                        const filter = document.createElementNS("http://www.w3.org/2000/svg", "filter");
+                        filter.setAttribute('id', 'windowShadow');
+                        filter.setAttribute('x', '-20%');
+                        filter.setAttribute('y', '-20%');
+                        filter.setAttribute('width', '140%');
+                        filter.setAttribute('height', '140%');
 
-                        // Основное окно (белая часть) с закругленными нижними углами
+                        const feOffset = document.createElementNS("http://www.w3.org/2000/svg", "feOffset");
+                        feOffset.setAttribute('result', 'offOut');
+                        feOffset.setAttribute('in', 'SourceAlpha');
+                        feOffset.setAttribute('dx', '-5');
+                        feOffset.setAttribute('dy', '5');
+
+                        const feGaussianBlur = document.createElementNS("http://www.w3.org/2000/svg", "feGaussianBlur");
+                        feGaussianBlur.setAttribute('result', 'blurOut');
+                        feGaussianBlur.setAttribute('in', 'offOut');
+                        feGaussianBlur.setAttribute('stdDeviation', '5');
+
+                        const feFlood = document.createElementNS("http://www.w3.org/2000/svg", "feFlood");
+                        feFlood.setAttribute('flood-color', 'black');
+                        feFlood.setAttribute('flood-opacity', '0.5');
+                        feFlood.setAttribute('result', 'flood');
+
+                        const feComposite = document.createElementNS("http://www.w3.org/2000/svg", "feComposite");
+                        feComposite.setAttribute('in', 'flood');
+                        feComposite.setAttribute('in2', 'blurOut');
+                        feComposite.setAttribute('operator', 'in');
+                        feComposite.setAttribute('result', 'shadow');
+
+                        const feMerge = document.createElementNS("http://www.w3.org/2000/svg", "feMerge");
+
+                        const feMergeNodeShadow = document.createElementNS("http://www.w3.org/2000/svg", "feMergeNode");
+                        feMergeNodeShadow.setAttribute('in', 'shadow');
+
+                        const feMergeNodeGraphic = document.createElementNS("http://www.w3.org/2000/svg", "feMergeNode");
+                        feMergeNodeGraphic.setAttribute('in', 'SourceGraphic');
+
+                        feMerge.appendChild(feMergeNodeShadow);
+                        feMerge.appendChild(feMergeNodeGraphic);
+
+                        filter.appendChild(feOffset);
+                        filter.appendChild(feGaussianBlur);
+                        filter.appendChild(feFlood);
+                        filter.appendChild(feComposite);
+                        filter.appendChild(feMerge);
+
+                        // Основное окно
                         const mainWindow = document.createElementNS("http://www.w3.org/2000/svg", "path");
                         mainWindow.setAttribute('d', 'M32,56 L32,236 C32,236 32,242 38,242 L382,242 C388,242 388,236 388,236 L388,56');
                         mainWindow.setAttribute('fill', 'white');
-                        mainWindow.setAttribute('stroke', 'grey');
+                        mainWindow.setAttribute('stroke', '#08BCE3');
                         mainWindow.setAttribute('stroke-width', '1');
+                        mainWindow.setAttribute('filter', 'url(#windowShadow)');
+                        windowGroup.appendChild(filter);
                         windowGroup.appendChild(mainWindow);
 
-                        // Верхняя панель (простая синяя заливка без градиента)
+                        // Верхняя панель
                         const titleBar = document.createElementNS("http://www.w3.org/2000/svg", "path");
                         titleBar.setAttribute('d', 'M32,56 L32,32 C32,32 32,26 38,26 L382,26 C388,26 388,32 388,32 L388,56');
-                        titleBar.setAttribute('fill', '#5a9bd5'); // Сплошной цвет вместо градиента
-                        titleBar.setAttribute('stroke', 'grey');
+                        titleBar.setAttribute('fill', '#08BCE3');
+                        titleBar.setAttribute('stroke', '#08BCE3');
                         titleBar.setAttribute('stroke-width', '1');
                         windowGroup.appendChild(titleBar);
 
-                        // Внутренняя белая обводка
-                        const innerStroke = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                        innerStroke.setAttribute('d', 'M34,54 L34,34 C34,34 34,28 38,28 L382,28 C386,28 386,34 386,34 L386,54');
-                        innerStroke.setAttribute('fill', 'none');
-                        innerStroke.setAttribute('stroke', 'white');
-                        innerStroke.setAttribute('stroke-width', '1');
-                        windowGroup.appendChild(innerStroke);
-
-                        // Кнопка закрытия (упрощенная версия)
-                        const closeBtn = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-                        closeBtn.setAttribute('x', '356');
-                        closeBtn.setAttribute('y', '37');
-                        closeBtn.setAttribute('width', '25');
-                        closeBtn.setAttribute('height', '16');
-                        closeBtn.setAttribute('rx', '4');
-                        closeBtn.setAttribute('ry', '4');
-                        closeBtn.setAttribute('fill', '#FF33F0'); // Фиолетовый цвет вместо градиента
-                        closeBtn.setAttribute('stroke', 'white');
-                        closeBtn.setAttribute('stroke-width', '1');
-                        windowGroup.appendChild(closeBtn);
-
+                        // Кнопка закрытия
                         const closeX = document.createElementNS("http://www.w3.org/2000/svg", "text");
-                        closeX.setAttribute('x', '366');
-                        closeX.setAttribute('y', '49');
-                        closeX.setAttribute('fill', 'white');
-                        closeX.setAttribute('font-size', '10');
-                        closeX.textContent = 'x';
+                        closeX.setAttribute('x', '364');
+                        closeX.setAttribute('y', '47');
+                        closeX.setAttribute('font-size', '12');
+                        closeX.setAttribute('fill', 'black');
+                        closeX.setAttribute('font-family', 'Arial');
+                        closeX.textContent = '✖';
                         windowGroup.appendChild(closeX);
 
-                        // Заголовок без свечения
+                        // Заголовок окна
                         const title = document.createElementNS("http://www.w3.org/2000/svg", "text");
                         title.setAttribute('x', '42');
-                        title.setAttribute('y', '50');
+                        title.setAttribute('y', '48');
                         title.setAttribute('class', 'window-title');
                         title.setAttribute('text-anchor', 'start');
                         title.textContent = '2010';
                         windowGroup.appendChild(title);
                     }
+
 
                     // === ВСТАВКА: убираем универсальный прямоугольник для 2000 ===
                     if (year !== '2000' && year !== '2010') {

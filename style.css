@@ -47,23 +47,21 @@ svg {
     transition: fill 0.3s ease;
     cursor: pointer;
 }
-
     .timeline-btn.first {
         fill: black;
     }
-
     .timeline-btn.second {
         fill: cyan;
     }
-
     .timeline-btn.third {
         fill: #000084;
     }
-
     .timeline-btn.fourth {
         fill: #a0c8ff;
     }
-
+    .timeline-btn.fifth {
+        fill: #08BCE3;
+    }
     .timeline-btn:hover {
         fill: #0056b3;
     }
@@ -105,6 +103,11 @@ svg {
         paint-order: stroke;
         text-shadow: 0 0 5px white;
     }
+    .timeline-year.fifth {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        fill: #100d0d;
+    }
+    
 
 .content-container {
     margin: 20px auto;
@@ -216,4 +219,19 @@ svg {
 
 .window-2000 .window-rect {
     filter: drop-shadow(3px 3px 5px rgba(0,0,0,0.2));
+}
+/* 2010 */
+.window-2010 .window-title {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    fill: black;
+}
+
+.window-2010 .window-content {
+    font-family: 'Segoe UI', sans-serif;
+    fill: #333333;
+    font-size: 12px;
+    text-anchor: start;
+}
+.window-2010 .window-rect {
+    filter: drop-shadow(-5px 5px 5px rgba(0,0,0,0.3));
 }
