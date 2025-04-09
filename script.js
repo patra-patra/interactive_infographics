@@ -11,9 +11,18 @@ document.addEventListener('DOMContentLoaded', function () {
         '2010': '#FF33F0'
     };
 
-    // Тексты для каждого года
+    // Тексты для каждого года (для 1970 года разбит на более короткие строки)
     const yearContents = {
-        '1970': 'Эпоха текстовых интерфейсов и командной строки',
+        '1970': [
+            "Чёткость - главный принцип: команды понятные,",
+            "реакция системы предсказуема.",
+            "  ",
+            "Появилась обратная связь: сообщения об ошибках",
+            "- часть интерфейса.",
+            "  ",
+            "Эра эффективности: дизайн оценивали по одному",
+            "критерию - помогает ли достичь цели?",
+        ],
         '1980': 'Появление графических интерфейсов (GUI)',
         '1990': 'Расцвет скевоморфизма и реалистичных интерфейсов',
         '2000': 'Доминирование плоского дизайна и минимализма',
@@ -33,53 +42,70 @@ document.addEventListener('DOMContentLoaded', function () {
             for (let i = 0; i < 3; i++) {
                 setTimeout(() => {
                     const windowGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
-                    windowGroup.setAttribute('class', 'window');
+                    windowGroup.setAttribute('class', `window window-${year}`);
                     windowGroup.setAttribute('transform', `translate(${10 + i * 20}, ${10 + i * 20})`);
 
-                    // Прямоугольник окна (более узкий и без скругленных углов)
+                    // Прямоугольник окна (увеличиваем высоту для 1970 года)
+                    const rectHeight = year === '1970' ? 220 : 200;
                     const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
                     rect.setAttribute('x', '30');
-                    rect.setAttribute('y', '30');  // Подняли окна выше (было 50)
+                    rect.setAttribute('y', '30');
                     rect.setAttribute('width', '350');
-                    rect.setAttribute('height', '200');  // Сделали окна выше
+                    rect.setAttribute('height', rectHeight);
                     rect.setAttribute('class', 'window-rect');
                     rect.setAttribute('fill', color);
                     rect.setAttribute('rx', '0');
                     rect.setAttribute('ry', '0');
 
-                    // Заголовок окна
+                    // Заголовок окна с звездочками
                     const title = document.createElementNS("http://www.w3.org/2000/svg", "text");
                     title.setAttribute('x', '205');
-                    title.setAttribute('y', '50');  // Подняли заголовок выше (было 70)
-                    title.setAttribute('text-anchor', 'middle');
+                    title.setAttribute('y', '50');
                     title.setAttribute('class', 'window-title');
-                    title.textContent = `${year}`;
+                    title.setAttribute('text-anchor', 'middle');
 
-                    // Содержимое окна (в две строки)
+                    if (year === '1970') {
+                        title.textContent = '*************** 1970 ***************';
+                    } else {
+                        title.textContent = year;
+                    }
+
+                    // Содержимое окна
                     const contentText = document.createElementNS("http://www.w3.org/2000/svg", "text");
-                    contentText.setAttribute('x', '205');
-                    contentText.setAttribute('y', '90');  // Подняли содержимое выше (было 110)
-                    contentText.setAttribute('text-anchor', 'middle');
+                    contentText.setAttribute('x', year === '1970' ? '50' : '205');
+                    contentText.setAttribute('y', year === '1970' ? '70' : '90');
                     contentText.setAttribute('class', 'window-content');
+                    contentText.setAttribute('text-anchor', year === '1970' ? 'start' : 'middle');
 
-                    // Разбиваем текст на две строки
-                    const words = content.split(' ');
-                    const middle = Math.floor(words.length / 2);
-                    const line1 = words.slice(0, middle).join(' ');
-                    const line2 = words.slice(middle).join(' ');
+                    if (year === '1970') {
+                        // Для 1970 года добавляем многострочный текст с меньшим межстрочным интервалом
+                        content.forEach((line, index) => {
+                            const tspan = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+                            tspan.setAttribute('x', '50');
+                            tspan.setAttribute('dy', index === 0 ? '0' : '15'); // Уменьшаем межстрочный интервал
+                            tspan.textContent = line;
+                            contentText.appendChild(tspan);
+                        });
+                    } else {
+                        // Для других годов обычный текст
+                        const words = content.split(' ');
+                        const middle = Math.floor(words.length / 2);
+                        const line1 = words.slice(0, middle).join(' ');
+                        const line2 = words.slice(middle).join(' ');
 
-                    const tspan1 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
-                    tspan1.setAttribute('x', '205');
-                    tspan1.setAttribute('dy', '0');
-                    tspan1.textContent = line1;
+                        const tspan1 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+                        tspan1.setAttribute('x', '205');
+                        tspan1.setAttribute('dy', '0');
+                        tspan1.textContent = line1;
 
-                    const tspan2 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
-                    tspan2.setAttribute('x', '205');
-                    tspan2.setAttribute('dy', '20');
-                    tspan2.textContent = line2;
+                        const tspan2 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+                        tspan2.setAttribute('x', '205');
+                        tspan2.setAttribute('dy', '20');
+                        tspan2.textContent = line2;
 
-                    contentText.appendChild(tspan1);
-                    contentText.appendChild(tspan2);
+                        contentText.appendChild(tspan1);
+                        contentText.appendChild(tspan2);
+                    }
 
                     windowGroup.appendChild(rect);
                     windowGroup.appendChild(title);

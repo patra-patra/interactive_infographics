@@ -16,7 +16,6 @@ body {
 h1 {
     font-size: 32px;
     margin-bottom: 20px;
-    font-family: 'PrintChar21', monospace;
 }
 
 .infographic-container {
@@ -50,7 +49,7 @@ svg {
 
     .timeline-year.first {
         fill: #00ff5a;
-        font-family: 'LCD5x8HRU', monospace; /* Применяем новый шрифт */
+        font-family: 'LCD5x8HRU', monospace;
     }
 
     .timeline-year.second {
@@ -70,7 +69,7 @@ svg {
     overflow: visible;
 }
 
-/* Стили для SVG окон */
+/* Общие стили для окон */
 .window {
     opacity: 0;
     transition: opacity 0.3s ease, transform 0.3s ease;
@@ -85,15 +84,32 @@ svg {
 }
 
 .window-title {
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 12px;
     fill: white;
-    font-family: 'LCD5x8HRU', monospace; /* Применяем новый шрифт */
 }
 
 .window-content {
     font-size: 12px;
     fill: white;
     text-anchor: middle;
-    font-family: 'LCD5x8HRU', monospace; /* Применяем новый шрифт */
 }
+
+/* Специальные стили для окон 1970 года */
+.window-1970 .window-title {
+    font-family: 'LCD5x8HRU', monospace;
+    fill: #00ff5a;
+    text-anchor: middle;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.window-1970 .window-content {
+    font-family: 'LCD5x8HRU', monospace;
+    fill: #00ff5a;
+    text-anchor: start;
+    font-size: 10px; 
+}
+
+    .window-1970 .window-content tspan {
+        font-size: 10px; 
+    }
